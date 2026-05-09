@@ -307,32 +307,38 @@ a.info {
  * Partie admin
  */ 
 
-.adminArticle {
+.adminArticle, .adminTable {
     margin-bottom: 20px;
     background-color: var(--commentPaleColor);
     color: white;
 }
 
-.articleLine {
+.articleLine, .articleTable {
     display: flex; 
 }
 
 .articleLine div {
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.articleLine .title {
+.articleTable .views, .articleTable .com, .articleTable .date {
+    width: 150px;
+    text-align: center;
+}
+
+.articleLine .title, .articleTable .title {
     font-weight: bold;
     min-width: 200px;
-    width: 200px;
+    width: 300px;
 }
 
 .articleLine .content {
     flex-grow: 1;
 }
 
-.articleLine > div {
+.articleLine > div, .articleTable > td, .articleTable > th {
     padding: 20px;
     border: 1px solid var(--backgroundColor);
 }
@@ -349,4 +355,12 @@ footer {
     padding: 20px;
     color: white;
     background-color: var(--headerColor);
+}
+
+.adminNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: space-around;
+    gap: 20px;
 }

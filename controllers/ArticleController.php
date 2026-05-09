@@ -69,4 +69,14 @@ class ArticleController
             $articleManager->incrementViews($id, $views); 
         }   
     }
+
+    /* 
+    * Récupère le nombre de commentaires d'un article.
+    */
+    public function getCommentCount(int $id) : int
+    {
+        $articleManager = new ArticleManager();
+        $article = $articleManager->countComments($id);
+        return $article;
+    }
 }

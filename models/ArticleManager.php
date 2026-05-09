@@ -103,4 +103,13 @@ class ArticleManager extends AbstractEntityManager
         $sql = "UPDATE article SET views = :views WHERE id = :id";
         $this->db->query($sql, ['id' => $id, 'views' => $views]);
     }
+
+    /* Compte le nombre de commentaires d'un article */
+    public function countComments(int $id) : int
+    {
+        $sql = "SELECT COUNT(id) AS nb_comments FROM comment WHERE id_article = :id";
+        $result = $this->db->query($sql, ['id' => $id]);
+        $data = $result->fetch();
+        return $data['nb_comments'];
+    }
 }
