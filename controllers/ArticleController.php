@@ -56,4 +56,17 @@ class ArticleController
         $view = new View("A propos");
         $view->render("apropos");
     }
+
+    /* incrémente le nombre de vues d'un article si l'utilisateur n'est pas connecté */
+    public function addView() : void
+    {
+        if (!isset($_SESSION['user'])) {
+            $id = Utils::request("id", -1);
+            $articleManager = new ArticleManager();
+            $article = $articleManager->getArticleById($id);
+            $views = $article->getViews();
+            $views++;
+            $articleManager->incrementViews($id, $views); 
+        }   
+    }
 }

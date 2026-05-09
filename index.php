@@ -25,6 +25,7 @@ try {
         case 'showArticle': 
             $articleController = new ArticleController();
             $articleController->showArticle();
+            $articleController->addView();
             break;
 
         case 'addArticle':
