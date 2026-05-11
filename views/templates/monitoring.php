@@ -12,14 +12,14 @@
 
 <table class="adminTable">
     <tr class="articleTable">
-        <th scope="col" class="title">Titre</th>
-        <th scope="col" class="views">Vues</th>
-        <th scope="col" class="com">Commentaires</th>
-        <th scope="col" class="date">Date de création</th>
+        <th scope="col" class="head">Titre ▲ / ▼</th>
+        <th scope="col" class="views">Vues ▲ / ▼</th>
+        <th scope="col" class="com">Commentaires ▲ / ▼</th>
+        <th scope="col" class="date">Date de création ▲ / ▼</th>
     </tr>
     <?php foreach ($articles as $article) { ?>    
         <tr class="articleTable">
-            <td class="title" scope="row"><?= $article->getTitle() ?></td>
+            <td class="title" scope="row"><a href="index.php?action=showArticle&id=<?= $article->getId() ?>"><?= $article->getTitle() ?></a></td>
             <td class="views"><?= $article->getViews() ?></td>
             <td class="com"><?= $articleController->getCommentCount($article->getId()) ?></td>
             <td class="date"><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>

@@ -27,7 +27,7 @@ class ArticleController
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticleById($id);
         if (!isset($_SESSION['user'])) {
-            $articleManager->incrementViews($id); 
+            $articleManager->updateViews($id); 
         }
 
         if (!$article) {

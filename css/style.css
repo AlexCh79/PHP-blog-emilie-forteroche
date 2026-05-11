@@ -324,14 +324,18 @@ a.info {
 }
 
 .articleTable .views, .articleTable .com, .articleTable .date {
-    width: 150px;
+    width: 300px;
     text-align: center;
 }
 
-.articleLine .title, .articleTable .title {
+.articleLine .title, .articleTable .title, .articleTable .head {
     font-weight: bold;
     min-width: 200px;
-    width: 300px;
+    width: 400px;
+}
+
+.articleTable:hover .title {
+    text-decoration: underline;
 }
 
 .articleLine .content {
