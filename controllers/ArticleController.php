@@ -23,7 +23,7 @@ class ArticleController
     {
         // Récupération de l'id de l'article demandé.
         $id = Utils::request("id", -1);
-
+        
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticleById($id);
         if (!isset($_SESSION['user'])) {

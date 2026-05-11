@@ -104,7 +104,11 @@ class ArticleManager extends AbstractEntityManager
         $this->db->query($sql, ['id' => $id]);
     }
 
-    /* Compte le nombre de commentaires d'un article */
+    /**
+     * Compte le nombre de commentaires d'un article.
+     * @param int $id : l'id de l'article.
+     * @return int
+     */
     public function countComments(int $id) : int
     {
         $sql = "SELECT COUNT(id) AS nb_comments FROM comment WHERE id_article = :id";
@@ -113,12 +117,17 @@ class ArticleManager extends AbstractEntityManager
         return $data['nb_comments'];
     }
 
+    
     /**
-     * Renvoie les articles dans un tableau
+     * Trie les articles dans le tableau Monitoring selon les paramètres de l'utilisateur
+     * @param string $sortParam : le paramètre de tri.
+     * @param string $sortOrder : l'ordre de tri.
+     * @return array
      */
-    public function getArticlesForMonitoring() : array
+    public function sortArticles(string $sortParam, string $sortOrder) : array
     {
-        $sql = "SELECT a.title, a.views, COUNT(c.id) AS nb_comments, DATE_FORMAT(a.date_creation, '%d/%m/%Y') AS date_creation FROM article as a LEFT JOIN comment as c ON a.id = c.id_article GROUP BY a.id";
+        $sql = "SELECT a.id, a.title, a.views, a.date_creation AS dateCreation, COUNT(c.id) AS nb_comments FROM article as a LEFT JOIN comment as c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortParam $sortOrder";
+
         $result = $this->db->query($sql);
         $articles = [];
 
@@ -127,4 +136,5 @@ class ArticleManager extends AbstractEntityManager
         }
         return $articles;
     }
+    
 }

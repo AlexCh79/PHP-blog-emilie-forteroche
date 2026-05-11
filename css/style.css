@@ -311,6 +311,7 @@ a.info {
     margin-bottom: 20px;
     background-color: var(--commentPaleColor);
     color: white;
+    width : 1366px;
 }
 
 .articleLine, .articleTable {
