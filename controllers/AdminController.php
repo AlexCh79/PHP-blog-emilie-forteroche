@@ -40,7 +40,8 @@ class AdminController {
         // On affiche la page de monitoring.
         $view = new View("Monitoring");
         $view->render("monitoring", [
-            'articles' => $articles
+            'articles' => $articles,
+            "viewport" => "width=1366px, initial-scale=1.0",
         ]);
     }
 
