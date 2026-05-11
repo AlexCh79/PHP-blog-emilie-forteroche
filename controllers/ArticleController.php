@@ -26,7 +26,10 @@ class ArticleController
 
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticleById($id);
-        
+        if (!isset($_SESSION['user'])) {
+            $articleManager->incrementViews($id); 
+        }
+
         if (!$article) {
             throw new Exception("L'article demandé n'existe pas.");
         }
@@ -55,19 +58,6 @@ class ArticleController
     public function showApropos() {
         $view = new View("A propos");
         $view->render("apropos");
-    }
-
-    /* incrémente le nombre de vues d'un article si l'utilisateur n'est pas connecté */
-    public function addView() : void
-    {
-        if (!isset($_SESSION['user'])) {
-            $id = Utils::request("id", -1);
-            $articleManager = new ArticleManager();
-            $article = $articleManager->getArticleById($id);
-            $views = $article->getViews();
-            $views++;
-            $articleManager->incrementViews($id, $views); 
-        }   
     }
 
     /* 

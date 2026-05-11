@@ -2,7 +2,10 @@
     /** 
      * Affichage de la partie monitoring basée sur la page admin de base : liste des articles selon leur titre, le nombre de vues, de commentaires, et la date de création pour chacun.
      */
-$articleController = new ArticleController();
+    $articleController = new ArticleController();
+    //$articleManager = new ArticleManager();
+    //$articles = $articleManager->getArticlesForMonitoring();
+
 ?>
 
 <h2>Monitoring des articles</h2>
@@ -21,7 +24,7 @@ $articleController = new ArticleController();
             <td class="com"><?= $articleController->getCommentCount($article->getId()) ?></td>
             <td class="date"><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>
         </tr>
-    <?php } ?>  
+    <?php } ?> 
 </table>
 
 <nav class="adminNav">

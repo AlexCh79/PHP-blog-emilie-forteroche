@@ -98,10 +98,10 @@ class ArticleManager extends AbstractEntityManager
      * @param int $id : l'id de l'article.
      * @return void
      */
-    public function incrementViews(int $id, int $views) : void
+    public function incrementViews(int $id) : void
     {
-        $sql = "UPDATE article SET views = :views WHERE id = :id";
-        $this->db->query($sql, ['id' => $id, 'views' => $views]);
+        $sql = "UPDATE article SET views = views + 1 WHERE id = :id";
+        $this->db->query($sql, ['id' => $id]);
     }
 
     /* Compte le nombre de commentaires d'un article */
@@ -111,5 +111,20 @@ class ArticleManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['id' => $id]);
         $data = $result->fetch();
         return $data['nb_comments'];
+    }
+
+    /**
+     * Renvoie les articles dans un tableau
+     */
+    public function getArticlesForMonitoring() : array
+    {
+        $sql = "SELECT a.title, a.views, COUNT(c.id) AS nb_comments, DATE_FORMAT(a.date_creation, '%d/%m/%Y') AS date_creation FROM article as a LEFT JOIN comment as c ON a.id = c.id_article GROUP BY a.id";
+        $result = $this->db->query($sql);
+        $articles = [];
+
+        while ($article = $result->fetch()) {
+            $articles[] = new Article($article);
+        }
+        return $articles;
     }
 }
