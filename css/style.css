@@ -323,6 +323,16 @@ a.info {
     align-items: center;
 }
 
+tbody tr:nth-child(even) {
+    background-color: var(--backgroundColor);
+    color: var(--commentColor);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--headerPaleColor);
+    color: var(--commentColor);
+}
+
 .articleTable .views, .articleTable .com, .articleTable .date {
     width: 300px;
     text-align: center;

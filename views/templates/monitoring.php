@@ -13,12 +13,15 @@
 <h2>Monitoring des articles</h2>
 
 <table class="adminTable">
-    <tr class="articleTable">
-        <th scope="col" class="head">Titre <a href="index.php?action=showMonitoring&sortParam=a.title&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=a.title&sortOrder=DESC">▼</a></th>
-        <th scope="col" class="views">Vues <a href="index.php?action=showMonitoring&sortParam=a.views&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=a.views&sortOrder=DESC">▼</a></th>
-        <th scope="col" class="com">Commentaires <a href="index.php?action=showMonitoring&sortParam=nb_comments&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=nb_comments&sortOrder=DESC">▼</a></th>
-        <th scope="col" class="date">Date de création <a href="index.php?action=showMonitoring&sortParam=a.date_creation&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=a.date_creation&sortOrder=DESC">▼</a></th>
-    </tr>
+    <thead>
+        <tr class="articleTable">
+            <th scope="col" class="head">Titre <a href="index.php?action=showMonitoring&sortParam=a.title&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=a.title&sortOrder=DESC">▼</a></th>
+            <th scope="col" class="views">Vues <a href="index.php?action=showMonitoring&sortParam=a.views&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=a.views&sortOrder=DESC">▼</a></th>
+            <th scope="col" class="com">Commentaires <a href="index.php?action=showMonitoring&sortParam=nb_comments&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=nb_comments&sortOrder=DESC">▼</a></th>
+            <th scope="col" class="date">Date de création <a href="index.php?action=showMonitoring&sortParam=a.date_creation&sortOrder=ASC">▲</a> / <a href="index.php?action=showMonitoring&sortParam=a.date_creation&sortOrder=DESC">▼</a></th>
+        </tr>
+    </thead>
+    <tbody class="articleTableRow">
     <?php foreach ($articles as $article) { ?>    
         <tr class="articleTable">
             <td class="title" scope="row"><a href="index.php?action=showArticle&id=<?= $article->getId() ?>"><?= $article->getTitle() ?></a></td>
@@ -27,6 +30,7 @@
             <td class="date"><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>
         </tr>
     <?php } ?> 
+    </tbody>
 </table>
 
 <nav class="adminNav">
