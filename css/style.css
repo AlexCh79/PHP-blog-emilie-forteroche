@@ -283,6 +283,18 @@ a.info {
     margin: 5px 0 5px 0;
 }
 
+/* Lien de suppression d'un commentaire*/
+.deleteComment {
+    margin-top: 10px;
+    color: var(--titleColor);
+    text-decoration: underline;
+    border: none;
+}
+
+.deleteComment button:hover {
+    cursor: hand;
+}
+
 /* Page d'erreur */
 
 .error {
