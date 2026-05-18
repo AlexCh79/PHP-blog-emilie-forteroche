@@ -26,23 +26,59 @@ class AdminController {
     }
 
     /**
-     * Affiche la page de monitoring
+     * Trie les articles dans le tableau Monitoring selon les paramètres de l'utilisateur
+     * @param string $sortParam : le paramètre de tri.
+     * @param string $sortOrder : l'ordre de tri.
+     * @return array
      */
-    public function showMonitoring() : void
+    public function showMonitoring(string $sortParam = 'title', string $sortOrder = 'ASC') : array
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
 
         // On récupère les articles.
         $articleManager = new ArticleManager();
-        $articles = $articleManager->getAllArticles();
+        $articles = $articleManager->sortArticles();
+
+        //Correspondance des paramètres avec les getters 
+        switch($sortParam){
+            case 'title':
+                $getter = 'getTitle';
+                break;
+            case 'views';
+                $getter = 'getViews';
+                break;
+            case 'comments':
+                $getter = 'getNbComments';
+                break;
+            case 'date':
+                $getter = 'getDateCreation';
+                break;
+            default:
+                $getter = 'getTitle';
+        }
+
+        // On trie le tableau avant de l'afficher en fonction des paramètres
+        usort($articles, function ($a, $b) use ($getter, $sortOrder) {
+            $valueA = $a->$getter();
+            $valueB = $b->$getter();
+
+            if ($valueA == $valueB) return 0;
+
+            if ($sortOrder === 'ASC') {
+                return ($valueA < $valueB) ? -1 : 1;
+            } else {
+                return ($valueA > $valueB) ? -1 : 1;
+            }
+        });
 
         // On affiche la page de monitoring.
         $view = new View("Monitoring");
         $view->render("monitoring", [
             'articles' => $articles,
-            "viewport" => "width=1366px, initial-scale=1.0",
         ]);
+
+        return $articles;
     }
 
     /**

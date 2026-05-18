@@ -76,7 +76,9 @@ try {
 
         case 'showMonitoring':
             $adminController = new AdminController();
-            $adminController->showMonitoring();
+            $sortParam = Utils::request('sortParam', 'title');
+            $sortOrder = Utils::request('sortOrder', 'ASC');
+            $adminController->showMonitoring($sortParam, $sortOrder);
             break;
 
         case 'deleteComment':

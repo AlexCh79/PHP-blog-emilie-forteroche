@@ -116,25 +116,20 @@ class ArticleManager extends AbstractEntityManager
         $data = $result->fetch();
         return $data['nb_comments'];
     }
-
     
     /**
-     * Trie les articles dans le tableau Monitoring selon les paramètres de l'utilisateur
-     * @param string $sortParam : le paramètre de tri.
-     * @param string $sortOrder : l'ordre de tri.
-     * @return array
+     * Récupère le tableau à afficher dans la page Monitoring
      */
-    public function sortArticles(string $sortParam, string $sortOrder) : array
+    public function sortArticles() : array
     {
-        $sql = "SELECT a.id, a.title, a.views, a.date_creation AS dateCreation, COUNT(c.id) AS nb_comments FROM article as a LEFT JOIN comment as c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortParam $sortOrder";
-
+        $sql = "SELECT a.id, a.title, a.views, a.date_creation AS dateCreation, COUNT(c.id) AS nb_comments FROM article as a LEFT JOIN comment as c ON a.id = c.id_article GROUP BY a.id";
         $result = $this->db->query($sql);
         $articles = [];
 
         while ($article = $result->fetch()) {
             $articles[] = new Article($article);
         }
+        
         return $articles;
     }
-    
 }

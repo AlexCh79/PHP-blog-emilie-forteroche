@@ -12,6 +12,7 @@
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
     private int $views = 0;
+    private int $nb_comments = 0;
 
     /**
      * Setter pour l'id de l'utilisateur. 
@@ -139,5 +140,17 @@
     public function getViews() : int 
     {
         return $this->views;
+    }
+
+    /** Setter pour le nombre de commentaires */
+    public function setNbComments(int $nb_comments): void
+    {
+        $this->nb_comments = $nb_comments;
+    }
+
+    /** Getter pour le nombre de commentaires */
+    public function getNbComments(): int
+    {
+        return $this->nb_comments;
     }
  }
